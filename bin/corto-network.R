@@ -15,7 +15,7 @@ parser$add_argument("-p", "--pvalue", type = "character", default = 1e-7,
 parser$add_argument("-t", "--threads", type = "integer", default = 2,
     help = "Number of threads (default 2)")
 parser$add_argument("-o", "--out", type = "character", default = FALSE,
-    help = "Output .RData")
+    help = "Output .RDS file")
 args <- parser$parse_args()
 
 
@@ -25,10 +25,10 @@ centroids <- tfs[tfs %in% rownames(inmat)]
 
 regulon <- corto(inmat,
     centroids = centroids,
-    nbootstraps = args$bootstraps,
+    nbootstraps = as.numeric(args$bootstraps),
     p = as.numeric(args$pvalue),
-    nthreads = args$threads,
+    nthreads = as.numeric(args$threads),
     verbose = TRUE)
 
 print("Saving")
-save(regulon, file = args$out)
+saveRDS(regulon, file = args$out)

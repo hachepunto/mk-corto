@@ -1,6 +1,6 @@
 <config.mk
 
-results/%.regulon.RData:	data/%.RDS
+results/%.regulon.RDS:	data/%.RDS
 	mkdir -p `dirname $target`
 	bin/corto-network.R \
 		-i $prereq \
